@@ -61,10 +61,10 @@ public abstract class car implements Movable{
         x += currentSpeed * Math.sin(dir);
     }
     public void turnLeft() {
-        dir = (dir + turnFactor) % (2 * Math.PI);
+        dir = (Math.abs(dir + turnFactor)) % (2 * Math.PI);
     }
     public void turnRight() {
-        dir = (dir - turnFactor) % (2 * Math.PI);
+        dir = (Math.abs(dir - turnFactor)) % (2 * Math.PI);
     }
 
     public abstract double speedFactor();
