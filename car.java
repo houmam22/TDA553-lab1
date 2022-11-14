@@ -8,13 +8,15 @@ public abstract class car implements Movable{
     private Color color; // Color of the car
     private String modelName; // The car model name
     private double x,y;
-    private int dir;
-    public car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
+    private double dir;
+    private double turnFactor;
+    public car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, double turnFactor) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
+        this.turnFactor = turnFactor;
     }
 
     public int getNrDoors(){
@@ -55,13 +57,14 @@ public abstract class car implements Movable{
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
     public void move() {
-
+        y += currentSpeed * Math.cos(dir);
+        x += currentSpeed * Math.sin(dir);
     }
     public void turnLeft() {
-
+        dir = (dir + turnFactor) % (2 * Math.PI);
     }
     public void turnRight() {
-
+        dir = (dir - turnFactor) % (2 * Math.PI);
     }
 
     public abstract double speedFactor();
