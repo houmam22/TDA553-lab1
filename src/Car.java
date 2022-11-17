@@ -41,6 +41,15 @@ public abstract class Car implements Movable{
         if(dir > 0) this.dir = dir % (2 * Math.PI);
         if(dir < 0) this.dir = (2 * Math.PI) -((-dir) % (2 * Math.PI));
     }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public double getDir() {
         return dir;
     }
@@ -78,20 +87,16 @@ public abstract class Car implements Movable{
         setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount);
     }
     public void move() {
-        if(Math.abs(y+currentSpeed * Math.cos(dir)) <= maxCoords){
-            y += currentSpeed * Math.cos(dir);
-        }else{ y = Math.signum(currentSpeed * Math.cos(dir)) * maxCoords;}
+        if(Math.abs(this.y+currentSpeed * Math.cos(dir)) <= maxCoords){
+            this.y += currentSpeed * Math.cos(dir);
+        }else{ this.y = Math.signum(currentSpeed * Math.cos(dir)) * maxCoords;}
 
         if(Math.abs(x+currentSpeed * Math.sin(dir)) <= maxCoords){
             x += currentSpeed * Math.sin(dir);
         }else{ x = Math.signum(currentSpeed * Math.sin(dir)) * maxCoords;}
     }
-    public void turnLeft() {
-        setDir(dir + turnFactor);
-    }
-    public void turnRight() {
-        setDir(dir - turnFactor);
-    }
+    public void turnLeft() {setDir(dir + turnFactor);}
+    public void turnRight() {setDir(dir - turnFactor);}
 
 
     public void gas(double amount){if(amount <= 1 && amount >= 0) incrementSpeed(amount);}
