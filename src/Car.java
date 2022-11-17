@@ -36,6 +36,14 @@ public abstract class Car implements Movable{
     public void setColor(Color clr){
         color = clr;
     }
+
+    public void setDir(double dir) {
+        if(dir > 0) this.dir = dir % (2 * Math.PI);
+        if(dir < 0) this.dir = (2 * Math.PI) -((-dir) % (2 * Math.PI));
+    }
+    public double getDir() {
+        return dir;
+    }
     public double getX() {
         return x;
     }
@@ -79,10 +87,10 @@ public abstract class Car implements Movable{
         }else{ x = Math.signum(currentSpeed * Math.sin(dir)) * maxCoords;}
     }
     public void turnLeft() {
-        dir = (Math.abs(dir + turnFactor)) % (2 * Math.PI);
+        setDir(dir + turnFactor);
     }
     public void turnRight() {
-        dir = (Math.abs(dir - turnFactor)) % (2 * Math.PI);
+        setDir(dir - turnFactor);
     }
 
 
